@@ -1,12 +1,26 @@
+// from react
 import { useState } from 'react'
+import { Route,BrowserRouter,Routes } from 'react-router-dom'
+// Style
 import './App.css'
+// Pages
+import Login from './pages/Login'
+import Subs from './pages/Subs'
+import DashB from './pages/DashB'
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
     <div className="App">
-      <h1>inicio com typeacript</h1>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/Subs' element={<Subs/>}/>
+          <Route path='/Login' element={<Login/>}/>
+          <Route path='/DashB' element={<DashB/>}/>
+          <Route path='*' element={<Subs/>}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   )
 }
