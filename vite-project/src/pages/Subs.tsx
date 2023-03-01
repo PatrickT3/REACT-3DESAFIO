@@ -1,4 +1,11 @@
+// React
 import React,{useState,FormEvent} from 'react';
+import { useNavigate, Link } from "react-router-dom";
+// Style
+import "./Subs.css";
+// images
+import imagem from "../assets/img/image 2.jpg";
+import logo from "../assets/img/Type=Colored negative.svg";
 
 const Subs = () => {
     const [name,setName] = useState<string>("");
@@ -10,6 +17,7 @@ const Subs = () => {
     const [passwordConf, setPasswordConf] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [error, setError] = useState<string>("");
+    const navigate = useNavigate();
 
     const HandleSub = (e:FormEvent) => {
         e.preventDefault();
@@ -22,6 +30,9 @@ const Subs = () => {
             return;
         }
         signup(email,password,name,lastName,city,country);
+
+        alert("Usuário cadatrado com sucesso!");
+        navigate("Login");
     }
 
     interface User {
@@ -63,18 +74,28 @@ const Subs = () => {
 
   return (
     <div>
-        <form onSubmit={HandleSub}>
-            {error && <div className="errou">{error}</div>}
-            <label><span>First name</span><input type="text" value={name} onChange={(e) => [setName(e.target.value), setError("")]}/></label>
-            <label><span>Last name</span><input type="text" value={lastName} onChange={(e) => [setLastName(e.target.value), setError("")]}/></label>     
-            <label><span>Birth date</span><input type="number" value={birthDate} onChange={(e) => [setBirthDate(e.target.value), setError("")]}/></label>
-            <label><span>Country</span><input type="text" value={country} onChange={(e) => [setCountry(e.target.value), setError("")]}/></label>
-            <label><span>City</span><input type="text" value={city} onChange={(e) => [setCity(e.target.value), setError("")]}/></label>
-            <label><span>E-mail</span><input type="email" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/></label>
-            <label><span>password</span><input type="text" value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/></label>
-            <label><span>password</span><input type="text" value={passwordConf} onChange={(e) => [setPasswordConf(e.target.value), setError("")]}/></label>
-            <button type="submit">Register Now</button>
-        </form>
+        <div className="body-ls">
+            <div className="form-e">
+                <h1 className="titulo">Welcome,</h1>
+                <p className="sub-titulo">Please, register to continue</p>
+                {error && <div className="errou">{error}</div>}
+                <form onSubmit={HandleSub} className="formul">
+                    <label><span className="span">First name</span><input className="btn-form" type="text" placeholder='Your first name' value={name} onChange={(e) => [setName(e.target.value), setError("")]}/></label>
+                    <label><span className="span">Last name</span><input className="btn-form" type="text" placeholder='Your last name' value={lastName} onChange={(e) => [setLastName(e.target.value), setError("")]}/></label>     
+                    <label><span className="span">Birth date</span><input className="btn-form" type="number" placeholder='MM/DD/YYYY' value={birthDate} onChange={(e) => [setBirthDate(e.target.value), setError("")]}/></label>
+                    <label><span className="span">Country</span><input className="btn-form" type="text" placeholder='Your Country' value={country} onChange={(e) => [setCountry(e.target.value), setError("")]}/></label>
+                    <label><span className="span">City</span><input className="btn-form" type="text" placeholder='Your City' value={city} onChange={(e) => [setCity(e.target.value), setError("")]}/></label>
+                    <label><span className="span">E-mail</span><input className="btn-form" type="email" placeholder='A valid e-mail here' value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/></label>
+                    <label><span className="span">password</span><input className="btn-form" type="password" placeholder='Your password' value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/></label>
+                    <label><span className="span">password</span><input className="btn-form" type="password" placeholder='Comfirm your password' value={passwordConf} onChange={(e) => [setPasswordConf(e.target.value), setError("")]}/></label>
+                    <button type="submit" className="btn-button">Register Now</button>
+                </form>
+            </div>
+            <div className="img-d">
+                <img src={logo} alt="logo" id="imgm-0"/>
+                <img src={imagem} alt="Imagem Principal" id="imgm-1"/>
+            </div>
+        </div>
     </div>
     )
 }
