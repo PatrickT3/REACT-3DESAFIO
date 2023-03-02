@@ -1,5 +1,4 @@
 // from react
-import { useState } from 'react'
 import { Route,BrowserRouter,Routes } from 'react-router-dom'
 // Style
 import './App.css'
@@ -9,7 +8,6 @@ import Subs from './pages/Subs'
 import DashB from './pages/DashB'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="App">
