@@ -92,7 +92,7 @@ const Subs = () => {
                 </form>
             </div>
             <div className="img-d">
-                <img src={logo} alt="logo" id="imgm-0"/>
+                <Link to="https://www.youtube.com/watch?v=ZNC-RNE0sdc" target="_blank"><img src={logo} alt="logo" id="imgm-0"/></Link>
                 <img src={imagem} alt="Imagem Principal" id="imgm-1"/>
             </div>
         </div>
