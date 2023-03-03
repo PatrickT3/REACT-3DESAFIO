@@ -1,0 +1,141 @@
+.body-ls-login{
+    color: rgba(224, 224, 224, 1);
+    height: 1080px;
+    width: 1920px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #33383D 0%, #1C1D20 100%);
+    display: flex;
+}
+.form-e-login,
+.img-d-login-login{
+    width: 50%;
+}
+.formul-login,.form-e-login{
+    display: flex;
+    flex-direction: column;
+    text-align: center;   
+}
+.titulo-login{
+    font-family: Mulish;
+    font-size: 60px;
+    font-weight: 400;
+    line-height: 75px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 287px;
+    margin-top: 197px;
+    margin-bottom: 0;
+}
+.sub-titulo-login{
+    font-family: Mulish;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 287px;
+    margin-top: 18px;
+
+}
+.formul-login h2{
+    font-family: Mulish;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 38px;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-left: 287px;
+    margin-top: 135px;
+    margin-bottom: 0;
+
+}
+.btn-form-login{
+    height: 60px;
+    width: 379px;
+    font-size: 20px;
+    border-radius: 50px;
+    margin-top: 32px;
+    margin-left: 285px;
+    padding-left: 20px;
+    background-color: #33383D;
+    color: #fff;
+    border: 1px solid #fff;
+}
+.erro-btn{
+    height: 60px;
+    width: 379px;
+    font-size: 20px;
+    border-radius: 50px;
+    margin-top: 32px;
+    margin-left: 285px;
+    padding-left: 20px;
+    background-color: #33383D;
+    color: #fff;
+    border: 1px solid rgba(233, 180, 37, 1);
+}
+.btn-form-login::placeholder {
+    color: #fff;
+  }
+  
+.btn-button-login{
+    position: absolute;
+    height: 67px;
+    width: 379px;
+    border-radius: 50px;
+    margin-top:500px;
+    margin-left: 297px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    background: linear-gradient(90deg, #FF2D04 0%, #C13216 100%),
+    linear-gradient(132.34deg, #FF2D04 22.57%, #C13216 72.04%);
+}
+.errou-login{
+    height: 40px;
+    width: 295px;
+    margin-left: 333px;
+    margin-top: 28px;
+    border-radius: nullpx;
+    font-family: Mulish;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: rgba(233, 180, 37, 1);
+}
+.img-d{
+    position:relative;
+}
+#imgm-0{
+    z-index: 2;
+    position: absolute;
+    margin-top:38px;
+    margin-left: 231px;
+}
+#imgm-1{
+    z-index: 1;
+    position: absolute;
+}
+.btnz{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+#btnz-1{
+    margin-left: 621px;
+    margin-top: 555px;
+}
+#btnz-2{
+    margin-left: 621px;
+    margin-top: 650px;
+}
+#btnz1{
+    margin-left: 700px;
+    margin-top: 555px;
+}
+#btnz2{
+    margin-left: 700px;
+    margin-top: 650px;
+}
