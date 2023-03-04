@@ -3,6 +3,7 @@
     height: 1080px;
     width: 1920px;
     margin: auto;
+    font-family: Mulish;
 }
 .headerTop{
     background-color: #fff;
@@ -27,6 +28,7 @@
     font-weight: 700;
     letter-spacing: 0em;
     text-align: left;
+    margin-bottom: 3px;
 }
 .divTit p{
     font-family: Mulish;
@@ -35,4 +37,38 @@
     letter-spacing: 0em;
     text-align: left;
     margin-top:3px;
+}
+.divHour{
+    margin-top: 32px;
+    font-family: Mulish;
+    letter-spacing: 0em;
+}
+#hor{
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 20px;
+    text-align: center;
+    padding-left: 30px;
+}
+
+#dayear{
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+}
+#cityCountry{
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+#cel{
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 60px;
+    letter-spacing: 0em;
+    text-align: center;
+    margin: 0;
+}
+.divCloud{
+    display: flex;
 }
