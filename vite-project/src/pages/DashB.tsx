@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 //Style
 import "./DashB.css";
 //img
 import nuvm from "../assets/img/Vector (2).svg";
+import seta from "../assets/img/Vector (3).svg";
+import logoC from "../assets/img/Type=Colored positive 1.svg";
 
 interface WeatherData {
   main: {
@@ -90,7 +93,13 @@ const DashB = () => {
             </div>
           )}
         </div>
-        <div className="divLogout">logout</div>
+        <div className="divLogout">
+          <Link className="img-logo" to="https://www.youtube.com/watch?v=ZNC-RNE0sdc" target="_blank"><img src={logoC} alt="logoCompass" /></Link>
+          <Link to="/Subs" className="link-login">
+            <img src={seta} alt="setinha" className="img-seta"/>
+            <p>Logout</p>
+          </Link>          
+        </div>
       </header>
     </div>
   );
