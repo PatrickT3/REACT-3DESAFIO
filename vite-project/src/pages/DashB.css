@@ -1,0 +1,38 @@
+.divPrinc{
+    background-color: aqua;
+    height: 1080px;
+    width: 1920px;
+    margin: auto;
+}
+.headerTop{
+    background-color: #fff;
+    height: 130px;
+    display: flex;
+    justify-content: space-between;
+}
+.divTit{
+    background-color: black;
+    color: #fff;
+    line-height: 20px;
+    height: 64px;
+    width: 587px;
+    margin-top: 32px;
+    padding-left: 24px;
+    border-top-right-radius:14px;
+    border-bottom-right-radius: 14px;
+}
+.divTit h1{
+    font-family: Mulish;
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: 0em;
+    text-align: left;
+}
+.divTit p{
+    font-family: Mulish;
+    font-size: 20px;
+    font-weight: 400;
+    letter-spacing: 0em;
+    text-align: left;
+    margin-top:3px;
+}
