@@ -1,5 +1,5 @@
 .divPrinc{
-    background-color: aqua;
+    background-color: #F5F5F5;
     height: 1080px;
     width: 1920px;
     margin: auto;
@@ -117,3 +117,156 @@
 .link-login:hover{
     background-color:aliceblue;
 }
+.container-form{
+    max-width: 100%;
+}
+.flex-form{
+    margin: 20px;
+    display:flex;
+}
+.class-btns{
+    margin-left: 680px;
+}
+.input-tesk{
+    height: 45px;
+    width: 391px;
+    border-radius: 10px;
+    margin-left: 3px;
+    border: 2px solid #FECE00;
+}
+.input-sel{
+    height: 50px;
+    width: 240px;
+    border-radius: 10px;
+    margin-left: 3px;
+    border: 2px solid #FECE00;
+    border-width: 2px;
+    border-style: solid;
+    border-color: #FECE00;
+}
+.input-hora{
+    height: 45px;
+    width: 120px;
+    border-radius: 10px;
+    margin-left: 3px;
+    border: 2px solid #FECE00;    
+}
+.input-sel,.input-tesk,
+.input-hora:focus {
+    outline: none;/* Estilo da borda quando o input está ativo */
+}
+.input-sel:not(:focus){
+    color: gray;
+}
+.btn-add{
+    height: 44px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px 12px 10px 12px;
+    background-color: #00BA88;
+    color:#fff;
+    border: none;
+}
+.btn-del{
+    height: 44px;
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px 12px 10px 12px;
+    background-color: #FF3D1F;
+    color:#fff;
+    border: none;  
+    margin-left: 24px;  
+}
+.btn-add,.btn-del{
+    cursor: pointer;
+    font-family: Mulish;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+}
+.days-week{
+    padding-left:125px;
+}
+.days-week button{
+    margin-right: 3px;
+    height: 33px;
+    width: 240px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
+    cursor: pointer;
+    border:none;
+    font-family: Mulish;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    transition: 1s;
+}
+.caixa{
+    height: 75px;
+    width: 85px;
+    border-radius: 10px;
+    font-family: Mulish;
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: center;
+    line-height: 75px;
+    margin-left: 24px;
+    background-color: #fff;
+}
+.caixa-2{
+    height: 63px;
+    width: 512px;
+    border-radius: 15px;
+    padding-left: 28px;
+    padding-top: 12px;
+    margin-left: 18px;
+    font-family: Mulish;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: left;
+    border: 1px solid rgba(255, 255, 255, 1);
+}
+.classDash li{
+    display: flex;
+}
+.classDash ul{
+    padding-left: 0;
+    max-height: 700px;
+    overflow: auto;
+}
+/* Estilize a barra de rolagem vertical */
+.classDash ul::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+  }
+  
+  /* Estilize o polegar (o controle deslizante da barra de rolagem) */
+  .classDash ul::-webkit-scrollbar-thumb {
+    background-color: rgba(220, 223, 227, 1); /* Cor do polegar */
+    border-radius: 5px; /* Borda arredondada */
+  }
+  
+  /* Estilize a área de trás do polegar */
+  .classDash ul::-webkit-scrollbar-track {
+    background-color: #fff; /* Cor da área de trás do polegar */
+  }
+
+  /* class apara o botão de Delete individual que não foi implementado*/
+  .span-p{
+    color: #F5F5F5;
+    background-color: #FF3D1F;
+    height: 25px;
+    width: 57px;
+    position: absolute;
+    border-radius: 4px;
+    margin-top: 30px;
+    margin-left: 600px;
+    text-align: center;
+    cursor: pointer;
+  }
