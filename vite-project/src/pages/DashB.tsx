@@ -6,6 +6,7 @@ import "./DashB.css";
 import nuvm from "../assets/img/Vector (2).svg";
 import seta from "../assets/img/Vector (3).svg";
 import logoC from "../assets/img/Type=Colored positive 1.svg";
+import bolona from "../assets/img/Group 5 1.svg";
 
 interface WeatherData {
   main: {
@@ -216,6 +217,7 @@ const DashB = () => {
 
   return (
     <div className="divPrinc">
+      <img src={bolona} alt="bola da logo" className="bolaLogo"/>
       <header className="headerTop">
         <div className="divTit">
           <h1 className="bannerTit">Weekly Planner </h1>

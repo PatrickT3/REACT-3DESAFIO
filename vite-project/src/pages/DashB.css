@@ -5,6 +5,11 @@
     margin: auto;
     font-family: Mulish;
 }
+.bolaLogo{
+    position: absolute;
+    margin-top: 448px;
+    margin-left: 1225px;
+}
 .headerTop{
     background-color: #fff;
     height: 130px;
