@@ -259,7 +259,7 @@ const DashB = () => {
               <option value="Saturday">Saturday</option>
               <option value="Sunday">Sunday</option>
             </select>
-              <input type="text" name="horario" className="input-hora" placeholder="01h 32m" required></input>
+              <input type="text" name="horario" className="input-hora" placeholder="01h 32m" maxLength={4} required></input>
             <div className="class-btns">
               <button type="submit" className="btn-add">+ Add to calendar</button>
               <button type="button" className="btn-del" onClick={() => clearList(chenge)}>- Delet all</button>
@@ -291,6 +291,61 @@ const DashB = () => {
         </section>
         <section>
           <p className="caixa" style={{backgroundColor:'rgba(255, 255, 255, 1)'}}>Time</p>
+        </section>
+        <section className="classDash">
+            {chenge === "Monday" && (
+              <ul>
+                {listMonday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'red'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p">Delete</span></p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Tuesday" && (
+              <ul>
+                {listTuesday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Wednesday" && (
+              <ul>
+                {listWednesday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Thursday" && (
+              <ul>
+                {listThursday.map((item) => (
+                  <li key={item.id}>
+                    <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p>  
+                    <p className="caixa-2" 
+                    style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Friday" && (
+              <ul>
+                {listFriday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Saturday" && (
+              <ul>
+                {listSaturday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            {chenge === "Sunday" && (
+              <ul>
+                {listSunday.map((item) => (
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                ))}
+              </ul>
+            )}
+            
         </section>
       </main>
     </div>
