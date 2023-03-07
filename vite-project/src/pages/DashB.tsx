@@ -142,7 +142,7 @@ const DashB = () => {
         break;
     }
     if (listToUpdate.some((user) => user.h === horario)) {
-      return alert('Horário já ocupado');
+      alert('Horário já ocupado');
     }
     const updatedList = [...listToUpdate, newUser];
     switch (chenge) {
@@ -234,7 +234,7 @@ const DashB = () => {
       console.log("Invalid day of the week.");
     } 
   }
-
+  
   return (
     <div className="divPrinc">
       <img src={bolona} alt="bola da logo" className="bolaLogo"/>
@@ -279,7 +279,7 @@ const DashB = () => {
               <option value="Saturday">Saturday</option>
               <option value="Sunday">Sunday</option>
             </select>
-              <input type="text" name="horario" className="input-hora" placeholder="01h 32m" maxLength={4} required></input>
+              <input type="time" name="horario" className="input-hora" placeholder="01h 32m" maxLength={4} required></input>
             <div className="class-btns">
               <button type="submit" className="btn-add">+ Add to calendar</button>
               <button type="button" className="btn-del" onClick={() => clearList(chenge)}>- Delet all</button>
@@ -313,20 +313,21 @@ const DashB = () => {
           <p className="caixa" style={{backgroundColor:'rgba(255, 255, 255, 1)'}}>Time</p>
         </section>
         <section className="classDash">
+
             {chenge === "Monday" && (
               <ul>
                 {listMonday.map((item) => (
                   <li key={item.id}><p className="caixa" style={{backgroundColor: 'red'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
-            )}
-            {chenge === "Tuesday" && (
+                )}
+             {chenge === "Tuesday" && (
               <ul>
                 {listTuesday.map((item) => (
                   <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
-            )}
+                )}
             {chenge === "Wednesday" && (
               <ul>
                 {listWednesday.map((item) => (
@@ -337,7 +338,7 @@ const DashB = () => {
             {chenge === "Thursday" && (
               <ul>
                 {listThursday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p><p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p><span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p><p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
