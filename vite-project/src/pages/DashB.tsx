@@ -214,6 +214,26 @@ const DashB = () => {
     }
     return {} as Style;
   };
+  const deleteOne = (id: number) => {
+
+    if (chenge === "Monday") {
+      setListMonday(listMonday.filter((item) => item.id !== id));
+    } else if (chenge === "Tuesday") {
+      setListTuesday(listTuesday.filter((item) => item.id !== id));
+    } else if (chenge === "Wednesday") {
+      setListWednesday(listWednesday.filter((item) => item.id !== id));
+    } else if (chenge === "Thursday") {
+      setListThursday(listThursday.filter((item) => item.id !== id));
+    } else if (chenge === "Friday") {
+      setListFriday(listFriday.filter((item) => item.id !== id));
+    } else if (chenge === "Saturday") {
+      setListSaturday(listSaturday.filter((item) => item.id !== id));
+    } else if (chenge === "Sunday") {
+      setListSunday(listSunday.filter((item) => item.id !== id));
+    } else {
+      console.log("Invalid day of the week.");
+    } 
+  }
 
   return (
     <div className="divPrinc">
@@ -296,52 +316,49 @@ const DashB = () => {
             {chenge === "Monday" && (
               <ul>
                 {listMonday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'red'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p">Delete</span></p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'red'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
             {chenge === "Tuesday" && (
               <ul>
                 {listTuesday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
             {chenge === "Wednesday" && (
               <ul>
                 {listWednesday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
             {chenge === "Thursday" && (
               <ul>
                 {listThursday.map((item) => (
-                  <li key={item.id}>
-                    <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p>  
-                    <p className="caixa-2" 
-                    style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p><p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p><span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></li>
                 ))}
               </ul>
             )}
             {chenge === "Friday" && (
               <ul>
                 {listFriday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
             {chenge === "Saturday" && (
               <ul>
                 {listSaturday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
             {chenge === "Sunday" && (
               <ul>
                 {listSunday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}</p></li>
+                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
                 ))}
               </ul>
             )}
