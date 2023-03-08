@@ -8,6 +8,11 @@ import seta from "../assets/img/Vector (3).svg";
 import logoC from "../assets/img/Type=Colored positive 1.svg";
 import bolona from "../assets/img/Group 5 1.svg";
 
+interface Item {
+  id: number;
+  h: string;
+  t: string;
+}
 interface WeatherData {
   main: {
     temp: number;
@@ -234,10 +239,9 @@ const DashB = () => {
       console.log("Invalid day of the week.");
     } 
   }
-  
   return (
     <div className="divPrinc">
-      <img src={bolona} alt="bola da logo" className="bolaLogo"/>
+      
       <header className="headerTop">
         <div className="divTit">
           <h1 className="bannerTit">Weekly Planner </h1>
@@ -313,7 +317,6 @@ const DashB = () => {
           <p className="caixa" style={{backgroundColor:'rgba(255, 255, 255, 1)'}}>Time</p>
         </section>
         <section className="classDash">
-
             {chenge === "Monday" && (
               <ul>
                 {listMonday.map((item) => (
@@ -356,14 +359,64 @@ const DashB = () => {
                 ))}
               </ul>
             )}
-            {chenge === "Sunday" && (
-              <ul>
-                {listSunday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
+            {chenge === 'Sunday' && (
+              (() => {
+                // Crie um objeto para rastrear as chaves existentes
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+
+                // Crie uma lista vazia para armazenar os elementos ul
+                const ulList: JSX.Element[] = [];
+
+                // Percorra cada item em listSunday
+                listSunday.forEach((item) => {
+                  // Verifique se a chave (item.h) já existe no objeto hKeys
+                  if (hKeys[item.h!]) {
+                    // Se já existe, adicione o item a essa lista
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{ backgroundColor: 'rgba(255, 0, 36, 0.5)' }}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    // Se não existe, crie um novo elemento ul e adicione o item a essa lista
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{ backgroundColor: 'rgba(255, 0, 36, 0.5)' }}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                // Para cada lista no objeto hKeys, crie um elemento ul e adicione os itens a essa lista
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) { // adicionado verificação de key aqui
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                // Exiba todos os elementos ul em um contêiner div
+                return <div>{ulList}</div>;
+              })()
             )}
-            
         </section>
       </main>
     </div>

@@ -4,6 +4,9 @@
     width: 1920px;
     margin: auto;
     font-family: Mulish;
+    background-image: url("../assets/img/Group 5 1.svg");
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
 }
 .bolaLogo{
     position: absolute;
@@ -241,24 +244,41 @@
 .classDash li{
     display: flex;
 }
-.classDash ul{
+.classDash {
     padding-left: 0;
     max-height: 700px;
+    max-width: 1900px;
     overflow: auto;
 }
-/* Estilize a barra de rolagem vertical */
-.classDash ul::-webkit-scrollbar {
-    width: 10px; /* Largura da barra de rolagem */
+/* Estilize a barra de rolagem horizontal */
+.classDash::-webkit-scrollbar {
+    height: 10px; /* Altura da barra de rolagem */
   }
   
   /* Estilize o polegar (o controle deslizante da barra de rolagem) */
-  .classDash ul::-webkit-scrollbar-thumb {
+  .classDash::-webkit-scrollbar-thumb {
     background-color: rgba(220, 223, 227, 1); /* Cor do polegar */
     border-radius: 5px; /* Borda arredondada */
   }
   
   /* Estilize a área de trás do polegar */
-  .classDash ul::-webkit-scrollbar-track {
+  .classDash::-webkit-scrollbar-track {
+    background-color: #fff; /* Cor da área de trás do polegar */
+  }
+  
+/* Estilize a barra de rolagem vertical */
+.classDash::-webkit-scrollbar {
+    width: 10px; /* Largura da barra de rolagem */
+  }
+  
+  /* Estilize o polegar (o controle deslizante da barra de rolagem) */
+  .classDash::-webkit-scrollbar-thumb {
+    background-color: rgba(220, 223, 227, 1); /* Cor do polegar */
+    border-radius: 5px; /* Borda arredondada */
+  }
+  
+  /* Estilize a área de trás do polegar */
+  .classDash::-webkit-scrollbar-track {
     background-color: #fff; /* Cor da área de trás do polegar */
   }
 
@@ -277,4 +297,8 @@
     cursor: pointer;
     float: right;
     font-weight: bold;
+  }
+  .horizontal-list {
+    display: flex;
+    flex-direction: row
   }
