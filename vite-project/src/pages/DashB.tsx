@@ -317,47 +317,288 @@ const DashB = () => {
           <p className="caixa" style={{backgroundColor:'rgba(255, 255, 255, 1)'}}>Time</p>
         </section>
         <section className="classDash">
-            {chenge === "Monday" && (
-              <ul>
-                {listMonday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'red'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
-                )}
-             {chenge === "Tuesday" && (
-              <ul>
-                {listTuesday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
-                )}
-            {chenge === "Wednesday" && (
-              <ul>
-                {listWednesday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
+        {chenge === 'Monday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listMonday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'red'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
             )}
-            {chenge === "Thursday" && (
-              <ul>
-                {listThursday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}> {item.h}</p><p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
+              {chenge === 'Tuesday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listTuesday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
             )}
-            {chenge === "Friday" && (
-              <ul>
-                {listFriday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
+                
+                {chenge === 'Wednesday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listWednesday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
             )}
-            {chenge === "Saturday" && (
-              <ul>
-                {listSaturday.map((item) => (
-                  <li key={item.id}><p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}> {item.h}</p>  <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>{item.t}<span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span></p></li>
-                ))}
-              </ul>
+            {chenge === 'Thursday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listThursday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            )}
+            {chenge === 'Friday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listFriday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right,rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            )}
+             {chenge === 'Saturday' && (
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                listSaturday.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
             )}
             {chenge === 'Sunday' && (
               (() => {
@@ -374,10 +615,7 @@ const DashB = () => {
                     // Se já existe, adicione o item a essa lista
                     hKeys[item.h!].push(
                       <li key={item.id}>
-                        <p className="caixa" style={{ backgroundColor: 'rgba(255, 0, 36, 0.5)' }}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
                           {item.t}
                           <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
                         </p>
