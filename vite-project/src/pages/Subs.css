@@ -113,3 +113,18 @@
 .links1:hover{
     text-decoration:underline;
 }
+.load{
+    position: absolute;
+    height: 40px;
+    width: 295px;
+    margin-left: 333px;
+    margin-top: 220px;
+    border-radius: nullpx;
+    font-family: Mulish;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 20px;
+    letter-spacing: 0em;
+    text-align: center;
+    color: rgba(233, 180, 37, 1);
+}

@@ -1,7 +1,7 @@
 //REACT
 import { ProtectContext } from '../context/Protect';
 import React,{useState,FormEvent,useContext} from 'react';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 //img
 import imagem from "../assets/img/image 2.jpg";
 import logo from "../assets/img/Type=Colored negative.svg";
@@ -71,6 +71,7 @@ const Login = () => {
           {error && <div className="errou-login">{error}</div>}
           <button className="btn-button-login">Log in</button>
         </form>
+        <Link to="/Sub" className="links">Register</Link>
       </div>
       <div className="img-d">
         <img src={logo} alt="logo" id="imgm-0"/>
