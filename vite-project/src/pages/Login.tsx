@@ -14,6 +14,7 @@ const Login = () => {
   const [error, setError] = useState<string>("");
   const {setPro,setCitty,citty} = useContext(ProtectContext);
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   interface User {
     name?: string;
@@ -25,6 +26,7 @@ const Login = () => {
   }
 
   async function login(cred: FormEvent<HTMLFormElement>){
+    setIsLoading(true);
     try{
       cred.preventDefault();
       if (!email || !password){
@@ -38,9 +40,9 @@ const Login = () => {
               body: JSON.stringify({email,password}),
           });
       const data = await res.json();
-      console.log(res.status===400);
-      setCitty(data['user']['city']);
+      //setCitty(data['user']['city']);
       if (res.status === 200) {
+        setCitty(data['user']['city']);
         alert("User logged in successfully");
         setPro("1");
         navigate("/DashB");
@@ -52,8 +54,11 @@ const Login = () => {
         alert("Something went wrong.");
       }
     } catch (error) {
-      console.error(error);
+      console.log(error);
       alert("Sorry, an error has occurred. Please try again later.");
+    }
+    finally {
+      setIsLoading(false);
     }
   }
   return (
@@ -61,6 +66,7 @@ const Login = () => {
       <div className="form-e-login">
         <h1 className="titulo-login">Welcome,</h1>
         <p className="sub-titulo-login">To continue browsing safely, log in to the network.</p>
+        {isLoading && <h2 className='loadd'>Carregando...</h2>}
         <form onSubmit={login} className="formul-login">
           <h2>Login</h2>
           <input className={!error? "btn-form-login":"erro-btn"} type="text" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/>

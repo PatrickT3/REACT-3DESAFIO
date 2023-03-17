@@ -65,7 +65,7 @@ const Subs = () => {
               alert("Something went wrong.");
             }
           } catch (error) {
-            console.error(error);
+            console.log(error);
             alert("Sorry, an error has occurred. Please try again later.");
           }
            finally {
