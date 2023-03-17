@@ -54,17 +54,21 @@ const Subs = () => {
               body: JSON.stringify(user),
             });
             const data = await response.json();
-            if (isObject(data)) {
+            if (response.status === 201) {
               alert("success!!");
               navigate("/Login");
-            } else if (typeof data === "string") {
-              alert("Email already in use.");
-              navigate("/Login");
-            } 
+            } else if (response.status === 400) {
+              alert("User with required email already exists. Please sign in!");
+            } else if (response.status === 404) {
+              alert("Not found.");
+            } else {
+              alert("Something went wrong.");
+            }
           } catch (error) {
             console.error(error);
             alert("Sorry, an error has occurred. Please try again later.");
-          } finally {
+          }
+           finally {
             setIsLoading(false);
           }
         };

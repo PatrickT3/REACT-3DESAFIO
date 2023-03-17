@@ -9,10 +9,10 @@ import logo from "../assets/img/Type=Colored negative.svg";
 import "./Login.css"
 
 const Login = () => {
-  const [name,setName] = useState<string>("");
-  const [passw,setPassw] = useState<string>("");
+  const [email,setEmail] = useState<string>("");
+  const [password,setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
-  const {setPro} = useContext(ProtectContext);
+  const {setPro,setCitty,citty} = useContext(ProtectContext);
   const navigate = useNavigate();
 
   interface User {
@@ -24,39 +24,36 @@ const Login = () => {
     password?: string;
   }
 
-  const HandleLog = (e:FormEvent) => {
-    e.preventDefault();
-
-    if (!name || !passw){
-      setError(`Wow, invalid username or password.
-                      Please, try again!`)
-      return;
-    }
-    const Answer = auth(name,passw);
-    if (Answer){
-      setError(Answer);
-      return;
-    }
-    
-    alert("success!");
-    setPro("1");
-    navigate("/DashB");
-  }
-
-  const auth = (name: string,password: string) => {
-    const usersStorage = JSON.parse(localStorage.getItem("users_bd") || "null") as User[] | null;
-    const hasUser = usersStorage?.filter((user) => user.name === name);
-    
-    if (hasUser?.length) {
-      if (hasUser[0].name === name && hasUser[0].password === password) {
-        const token = Math.random().toString(36).substring(2);
-        localStorage.setItem("user_token", JSON.stringify({ name, token }));
+  async function login(cred: FormEvent<HTMLFormElement>){
+    try{
+      cred.preventDefault();
+      if (!email || !password){
+        setError(`Wow, invalid username or password.
+                        Please, try again!`)
         return;
-      } else {
-        return "Incorrect email or password.";
       }
-    } else {
-      return "User not registered.";
+      const res = await fetch("https://latam-challenge-2.deta.dev/api/v1/users/sign-in" , {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({email,password}),
+          });
+      const data = await res.json();
+      console.log(res.status===400);
+      setCitty(data['user']['city']);
+      if (res.status === 200) {
+        alert("User logged in successfully");
+        setPro("1");
+        navigate("/DashB");
+      } else if (res.status === 400) {
+        alert("Bad credentials");
+      } else if (res.status === 404) {
+        alert("Not found.");
+      } else {
+        alert("Something went wrong.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Sorry, an error has occurred. Please try again later.");
     }
   }
   return (
@@ -64,10 +61,10 @@ const Login = () => {
       <div className="form-e-login">
         <h1 className="titulo-login">Welcome,</h1>
         <p className="sub-titulo-login">To continue browsing safely, log in to the network.</p>
-        <form onSubmit={HandleLog} className="formul-login">
+        <form onSubmit={login} className="formul-login">
           <h2>Login</h2>
-          <input className={!error? "btn-form-login":"erro-btn"} type="text" value={name} onChange={(e) => [setName(e.target.value), setError("")]}/>
-          <input className={!error? "btn-form-login":"erro-btn"} type="password" value={passw} onChange={(e) => [setPassw(e.target.value), setError("")]}/>
+          <input className={!error? "btn-form-login":"erro-btn"} type="text" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/>
+          <input className={!error? "btn-form-login":"erro-btn"} type="password" value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/>
           {error && <div className="errou-login">{error}</div>}
           <button className="btn-button-login">Log in</button>
         </form>

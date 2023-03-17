@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useContext } from "react";
 import { Link } from "react-router-dom";
+import { ProtectContext } from '../context/Protect';
 //Style
 import "./DashB.css";
 //img
 import nuvm from "../assets/img/Vector (2).svg";
 import seta from "../assets/img/Vector (3).svg";
 import logoC from "../assets/img/Type=Colored positive 1.svg";
-import bolona from "../assets/img/Group 5 1.svg";
+
 
 interface Item {
   id: number;
@@ -57,13 +58,13 @@ const DashB = () => {
   const [listFriday, setListFriday] = useState<Task[]>([]);
   const [listSaturday, setListSaturday] = useState<Task[]>([]);
   const [listSunday, setListSunday] = useState<Task[]>([]);
-  const usersStorage = JSON.parse(localStorage.getItem("users_bd") || "null") as User[] | null;
-  const city: string = usersStorage ? usersStorage[0]["city"] || "" : "";
+  const {citty,countryy} = useContext(ProtectContext);
+  
 
   useEffect(() => {
     async function fetchDados() {
       const url = `https://api.openweathermap.org/data/2.5/weather?q=${encodeURI(
-        city
+        citty
       )}&units=metric&appid=6c3ad536f4936801eb863a79db679f51`;
       const response = await fetch(url);
       const json = await response.json();
@@ -71,7 +72,7 @@ const DashB = () => {
     }
     fetchDados();
   }, []);
-
+  console.log(citty);
   useEffect(() => {
     const intervalId = setInterval(() => {
       const dataAtual = new Date();
@@ -254,7 +255,7 @@ const DashB = () => {
         <div className="divTemp">
           {dadosTemp && (
             <div>
-              <p id="cityCountry"> {city} - {dadosTemp.sys.country}</p>
+              <p id="cityCountry"> {citty} - {dadosTemp.sys.country}</p>
               <div className="divCloud">
                 <img src={nuvm} alt="nuvem" />
                 <p id="cel"> {dadosTemp.main.temp.toFixed(0)}°</p>
