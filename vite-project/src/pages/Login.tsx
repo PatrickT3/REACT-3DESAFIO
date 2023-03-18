@@ -40,8 +40,9 @@ const Login = () => {
               body: JSON.stringify({email,password}),
           });
       const data = await res.json();
-      //setCitty(data['user']['city']);
+      console.log(data);
       if (res.status === 200) {
+        localStorage.setItem("token", data['token']);
         setCitty(data['user']['city']);
         alert("User logged in successfully");
         setPro("1");
