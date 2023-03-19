@@ -43,6 +43,14 @@ interface Style {
   boxShadow: string;
   width: string;
 }
+interface Event {
+  _id: string;
+  description: string;
+  dayOfWeek: string;
+  userId: string;
+  createdAt: string;
+  // ... outros campos, se houver
+}
 
 
 const DashB = () => {
@@ -58,7 +66,11 @@ const DashB = () => {
   const [listFriday, setListFriday] = useState<Task[]>([]);
   const [listSaturday, setListSaturday] = useState<Task[]>([]);
   const [listSunday, setListSunday] = useState<Task[]>([]);
-  const {citty,countryy} = useContext(ProtectContext);
+  const {citty} = useContext(ProtectContext);
+  const [events, setEvents] = useState<Event[]>([]);
+  const [mud,setMud] = useState<string>('');
+  const [newList, setNewList] = useState<{ id: string; h: string; t: string }[]>([]);
+
   
 
   useEffect(() => {
@@ -99,8 +111,25 @@ const DashB = () => {
     
     return () => clearInterval(dias);
   }, []);
+  //testes
+  const token = localStorage.getItem("token") || null;
 
-
+  useEffect(() => {
+    const url = `https://latam-challenge-2.deta.dev/api/v1/events?dayOfWeek=${chenge}`;
+    fetch(url, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const newEvents = data['events'].map((event: Event) => {
+          const [h, t] = event.description.split("&");
+          return { id: event._id, h, t };
+        });
+        setNewList(newEvents);
+        setEvents(data['events']);
+      });
+  }, [chenge, mud, token]);
+  
   // Conteudo principal 
   // 1- Var change control
   const handleChange: React.ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -111,9 +140,41 @@ const DashB = () => {
     const formData = new FormData(e.currentTarget);
     const pHor = formData.get('horario');
     const task = formData.get('tesk');
-    addNewUser(pHor as string, task as string);
+    const concat = pHor + "&" + task;
+    Addtask(concat);
+
+    //addNewUser(pHor as string, task as string);
     e.currentTarget.reset();
   };
+  async function Addtask(concat: string) {
+    try {
+        const res = await fetch("https://latam-challenge-2.deta.dev/api/v1/events", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify({
+            "description": `${concat}`,
+            "dayOfWeek": `${chenge}`
+        }),
+        });
+
+        if (res.ok) {
+        const data = await res.json();
+        setMud("1");
+        alert("ADD");
+        } else {
+        const errorResponse = await res.json();
+        throw new Error(`${res.status}: ${errorResponse.message}`);
+        }
+
+    } catch (error: any) {
+      console.error(error);
+      alert(`Error: ${(error as Error).message}`);
+  }
+  
+    }
   
   const addNewUser = (horario: string | null, tesk: string | null) => {
     if (!horario || !tesk) {
@@ -220,7 +281,7 @@ const DashB = () => {
     }
     return {} as Style;
   };
-  const deleteOne = (id: number) => {
+  const deleteOne = (id: string) => {
 
     if (chenge === "Monday") {
       setListMonday(listMonday.filter((item) => item.id !== id));
@@ -318,12 +379,13 @@ const DashB = () => {
           <p className="caixa" style={{backgroundColor:'rgba(255, 255, 255, 1)'}}>Time</p>
         </section>
         <section className="classDash">
-        {chenge === 'Monday' && (
+        <div>
+        {newList && 
               (() => {
                 const hKeys: { [key: string]: JSX.Element[] } = {};
                 const ulList: JSX.Element[] = [];
 
-                listMonday.forEach((item) => {
+                newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <li key={item.id}>
@@ -364,298 +426,8 @@ const DashB = () => {
 
                 return <div>{ulList}</div>;
               })()
-            )}
-              {chenge === 'Tuesday' && (
-              (() => {
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-                const ulList: JSX.Element[] = [];
-
-                listTuesday.forEach((item) => {
-                  if (hKeys[item.h!]) {
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 1)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) {
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                return <div>{ulList}</div>;
-              })()
-            )}
-                
-                {chenge === 'Wednesday' && (
-              (() => {
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-                const ulList: JSX.Element[] = [];
-
-                listWednesday.forEach((item) => {
-                  if (hKeys[item.h!]) {
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) {
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                return <div>{ulList}</div>;
-              })()
-            )}
-            {chenge === 'Thursday' && (
-              (() => {
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-                const ulList: JSX.Element[] = [];
-
-                listThursday.forEach((item) => {
-                  if (hKeys[item.h!]) {
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) {
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                return <div>{ulList}</div>;
-              })()
-            )}
-            {chenge === 'Friday' && (
-              (() => {
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-                const ulList: JSX.Element[] = [];
-
-                listFriday.forEach((item) => {
-                  if (hKeys[item.h!]) {
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right,rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) {
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                return <div>{ulList}</div>;
-              })()
-            )}
-             {chenge === 'Saturday' && (
-              (() => {
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-                const ulList: JSX.Element[] = [];
-
-                listSaturday.forEach((item) => {
-                  if (hKeys[item.h!]) {
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) {
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                return <div>{ulList}</div>;
-              })()
-            )}
-            {chenge === 'Sunday' && (
-              (() => {
-                // Crie um objeto para rastrear as chaves existentes
-                const hKeys: { [key: string]: JSX.Element[] } = {};
-
-                // Crie uma lista vazia para armazenar os elementos ul
-                const ulList: JSX.Element[] = [];
-
-                // Percorra cada item em listSunday
-                listSunday.forEach((item) => {
-                  // Verifique se a chave (item.h) já existe no objeto hKeys
-                  if (hKeys[item.h!]) {
-                    // Se já existe, adicione o item a essa lista
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  } else {
-                    // Se não existe, crie um novo elemento ul e adicione o item a essa lista
-                    hKeys[item.h!] = [];
-                    hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{ backgroundColor: 'rgba(255, 0, 36, 0.5)' }}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
-                    );
-                  }
-                });
-
-                // Para cada lista no objeto hKeys, crie um elemento ul e adicione os itens a essa lista
-                for (const key in hKeys) {
-                  if (key && hKeys.hasOwnProperty(key)) { // adicionado verificação de key aqui
-                    const ul: JSX.Element = (
-                      <ul key={key} className="horizontal-list">
-                        {hKeys[key]}
-                      </ul>
-                    );
-                    ulList.push(ul);
-                  }
-                
-                }
-
-                // Exiba todos os elementos ul em um contêiner div
-                return <div>{ulList}</div>;
-              })()
-            )}
+            }      
+        </div>
         </section>
       </main>
     </div>
