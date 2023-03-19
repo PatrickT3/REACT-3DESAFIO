@@ -302,3 +302,11 @@
     display: flex;
     flex-direction: row
   }
+
+  .loadD{
+    font-size: 40px;
+    font-weight: bold;
+    color:  rgb(128, 128, 128);
+    margin-top:100px;
+    margin-left: 300px;
+  }

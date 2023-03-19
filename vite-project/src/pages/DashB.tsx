@@ -54,7 +54,7 @@ interface Event {
 
 
 const DashB = () => {
-  const [chenge, setChange] = useState<string>('');
+  const [chenge, setChange] = useState<string>('Monday');
   const [dadosTemp, setDadosTemp] = useState<WeatherData>();
   const [horaAtual, setHoraAtual] = useState<string>('');
   const [activeButton, setActiveButton] = useState<Button>();
@@ -70,6 +70,7 @@ const DashB = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [mud,setMud] = useState<string>('');
   const [newList, setNewList] = useState<{ id: string; h: string; t: string }[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   
 
@@ -115,6 +116,7 @@ const DashB = () => {
   const token = localStorage.getItem("token") || null;
 
   useEffect(() => {
+    setIsLoading(true);
     const url = `https://latam-challenge-2.deta.dev/api/v1/events?dayOfWeek=${chenge}`;
     fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
@@ -127,6 +129,7 @@ const DashB = () => {
         });
         setNewList(newEvents);
         setEvents(data['events']);
+        setIsLoading(false);
       });
   }, [chenge, mud, token]);
   
@@ -282,7 +285,7 @@ const DashB = () => {
     return {} as Style;
   };
   const deleteOne = (id: string) => {
-
+    /*
     if (chenge === "Monday") {
       setListMonday(listMonday.filter((item) => item.id !== id));
     } else if (chenge === "Tuesday") {
@@ -299,7 +302,7 @@ const DashB = () => {
       setListSunday(listSunday.filter((item) => item.id !== id));
     } else {
       console.log("Invalid day of the week.");
-    } 
+    } */
   }
   return (
     <div className="divPrinc">
@@ -380,7 +383,8 @@ const DashB = () => {
         </section>
         <section className="classDash">
         <div>
-        {newList && 
+        {isLoading && <div className="loadD">Loading...</div>}
+        {!isLoading && chenge === 'Monday' &&
               (() => {
                 const hKeys: { [key: string]: JSX.Element[] } = {};
                 const ulList: JSX.Element[] = [];
@@ -402,7 +406,7 @@ const DashB = () => {
                         <p className="caixa" style={{backgroundColor: 'red'}}>
                           {item.h}
                         </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, #FF4B2B 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, red 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
                           {item.t}
                           <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
                         </p>
@@ -426,7 +430,290 @@ const DashB = () => {
 
                 return <div>{ulList}</div>;
               })()
-            }      
+            } 
+            {!isLoading && chenge === 'Tuesday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor:  'rgba(255, 128, 0, 1)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 128, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            }
+            {!isLoading && chenge === 'Wednesday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 1)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 206, 0, 1) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            }
+            {!isLoading && chenge === 'Thursday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background:'linear-gradient(to right, rgba(255, 0, 36, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            }  
+            {!isLoading && chenge === 'Friday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 128, 0, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background:  'linear-gradient(to right,rgba(255, 128, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            } 
+              {!isLoading && chenge === 'Saturday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 206, 0, 0.7)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background:'linear-gradient(to right, rgba(255, 206, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            }  
+            {!isLoading && chenge === 'Sunday' &&
+              (() => {
+                const hKeys: { [key: string]: JSX.Element[] } = {};
+                const ulList: JSX.Element[] = [];
+
+                newList.forEach((item) => {
+                  if (hKeys[item.h!]) {
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  } else {
+                    hKeys[item.h!] = [];
+                    hKeys[item.h!].push(
+                      <li key={item.id}>
+                        <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}>
+                          {item.h}
+                        </p>
+                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                          {item.t}
+                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                        </p>
+                      </li>
+                    );
+                  }
+                });
+
+                
+                for (const key in hKeys) {
+                  if (key && hKeys.hasOwnProperty(key)) {
+                    const ul: JSX.Element = (
+                      <ul key={key} className="horizontal-list">
+                        {hKeys[key]}
+                      </ul>
+                    );
+                    ulList.push(ul);
+                  }
+                
+                }
+
+                return <div>{ulList}</div>;
+              })()
+            }  
+                 
         </div>
         </section>
       </main>
