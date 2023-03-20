@@ -313,11 +313,20 @@
   .linha{
     width: 1700px;
     height: 3px;
-    margin-top: 53px;
+    margin-top: 56px;
     margin-left: -550px;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
   }
   .pai{
     position: relative;
+  }
+  .bola-black{
+    height: 27px;
+    width: 27px;
+    border-radius: 50%;
+    margin-top: 43px;
+    margin-left: -560px;
+    background-color:rgba(0, 0, 0, 0.7) ;
+    position: absolute;
   }

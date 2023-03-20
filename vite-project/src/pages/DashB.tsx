@@ -325,6 +325,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -375,6 +376,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -425,6 +427,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -475,6 +478,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -525,6 +529,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -575,6 +580,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
@@ -625,6 +631,7 @@ const DashB = () => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
                       <div className="pai">
+                        <p className="bola-black"></p>
                         <span className="linha"></span>
                         <li key={item.id}>
                           <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
