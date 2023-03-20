@@ -5,6 +5,8 @@ import { useNavigate, Link } from "react-router-dom";
 //img
 import imagem from "../assets/img/image 2.jpg";
 import logo from "../assets/img/Type=Colored negative.svg";
+import pess from "../assets/img/Vector (1).svg"
+import cad from "../assets/img/Vector.svg"
 //Style
 import "./Login.css"
 
@@ -15,6 +17,9 @@ const Login = () => {
   const {setPro,setCitty,citty} = useContext(ProtectContext);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const [ativo, setAtivo] = useState(false);
+  const [ativoCad, setAtivoCad] = useState(false);
+
 
   interface User {
     name?: string;
@@ -64,14 +69,16 @@ const Login = () => {
   }
   return (
     <div className="body-ls-login">
+      <img src={pess} alt="pessoa" className="btnz" id={ativo === false?"btnz1":"btnz-1"}/>
+      <img src={cad} alt="cadeado" className="btnz" id={ativoCad === false?"btnz2":"btnz-2"}/>
       <div className="form-e-login">
         <h1 className="titulo-login">Welcome,</h1>
         <p className="sub-titulo-login">To continue browsing safely, log in to the network.</p>
         {isLoading && <h2 className='loadd'>Carregando...</h2>}
         <form onSubmit={login} className="formul-login">
           <h2>Login</h2>
-          <input className={!error? "btn-form-login":"erro-btn"} type="text" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/>
-          <input className={!error? "btn-form-login":"erro-btn"} type="password" value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/>
+          <input className={!error? "btn-form-login":"erro-btn"} onClick={() => setAtivo(true)} type="text" value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/>
+          <input className={!error? "btn-form-login":"erro-btn"} onClick={() => setAtivoCad(true)} type="password" value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/>
           {error && <div className="errou-login">{error}</div>}
           <button className="btn-button-login">Log in</button>
         </form>

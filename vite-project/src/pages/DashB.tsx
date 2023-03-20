@@ -59,13 +59,6 @@ const DashB = () => {
   const [horaAtual, setHoraAtual] = useState<string>('');
   const [activeButton, setActiveButton] = useState<Button>();
   const [dayAtual,setDayAtual] = useState<string>('');
-  const [listMonday, setListMonday] = useState<Task[]>([]);
-  const [listTuesday, setListTuesday] = useState<Task[]>([]);
-  const [listWednesday, setListWednesday] = useState<Task[]>([]);
-  const [listThursday, setListThursday] = useState<Task[]>([]);
-  const [listFriday, setListFriday] = useState<Task[]>([]);
-  const [listSaturday, setListSaturday] = useState<Task[]>([]);
-  const [listSunday, setListSunday] = useState<Task[]>([]);
   const {citty} = useContext(ProtectContext);
   const [events, setEvents] = useState<Event[]>([]);
   const [mud,setMud] = useState<string>('');

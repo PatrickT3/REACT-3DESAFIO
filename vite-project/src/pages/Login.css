@@ -166,3 +166,24 @@
     text-align: center;
     color: rgba(233, 180, 37, 1);
 }
+.btnz{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+#btnz-1{
+    margin-left: 621px;
+    margin-top: 555px;
+}
+#btnz-2{
+    margin-left: 621px;
+    margin-top: 650px;
+}
+#btnz1{
+    margin-left: 700px;
+    margin-top: 555px;
+}
+#btnz2{
+    margin-left: 700px;
+    margin-top: 650px;
+}
