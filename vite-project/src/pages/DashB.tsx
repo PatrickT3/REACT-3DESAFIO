@@ -120,6 +120,7 @@ const DashB = () => {
     const url = `https://latam-challenge-2.deta.dev/api/v1/events?dayOfWeek=${chenge}`;
     fetch(url, {
       headers: { Authorization: `Bearer ${token}` },
+      cache: 'no-store'
     })
       .then((response) => response.json())
       .then((data) => {
@@ -131,7 +132,7 @@ const DashB = () => {
         setEvents(data['events']);
         setIsLoading(false);
       });
-  }, [chenge, mud, token]);
+  }, [chenge,mud, token]);
   
   // Conteudo principal 
   // 1- Var change control
@@ -145,11 +146,10 @@ const DashB = () => {
     const task = formData.get('tesk');
     const concat = pHor + "&" + task;
     Addtask(concat);
-
-    //addNewUser(pHor as string, task as string);
     e.currentTarget.reset();
   };
   async function Addtask(concat: string) {
+    setIsLoading(true);
     try {
         const res = await fetch("https://latam-challenge-2.deta.dev/api/v1/events", {
         method: 'POST',
@@ -164,12 +164,14 @@ const DashB = () => {
         });
 
         if (res.ok) {
-        const data = await res.json();
-        setMud("1");
-        alert("ADD");
+          setMud(Date());
+          const data = await res.json();
+          setIsLoading(false);
+          alert("ADD");
+          
         } else {
-        const errorResponse = await res.json();
-        throw new Error(`${res.status}: ${errorResponse.message}`);
+          const errorResponse = await res.json();
+          throw new Error(`${res.status}: ${errorResponse.message}`);
         }
 
     } catch (error: any) {
@@ -243,31 +245,28 @@ const DashB = () => {
   };
   
   const clearList = (day: string) => {
-    switch (day) {
-      case "Monday":
-        setListMonday([]);
-        break;
-      case "Tuesday":
-        setListTuesday([]);
-        break;
-      case "Wednesday":
-        setListWednesday([]);
-        break;
-      case "Thursday":
-        setListThursday([]);
-        break;
-      case "Friday":
-        setListFriday([]);
-        break;
-      case "Saturday":
-        setListSaturday([]);
-        break;
-      case "Sunday":
-        setListSunday([]);
-        break;
-      default:
-        break;
-    }
+    setIsLoading(true);
+    console.log(day);
+    fetch(`https://latam-challenge-2.deta.dev/api/v1/events?dayOfWeek=${day.toLocaleLowerCase()}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } ,
+        
+        })
+        .then(response => {
+        if (response.ok) {
+          setMud(Date());
+          setIsLoading(false);
+          // o item foi excluído com sucesso
+          alert('Item excluído com sucesso!');
+        } else {
+            // a exclusão falhou
+            throw new Error(`Erro ${response.status}: ${response.statusText}`);
+        }
+        })
+        .catch(error => {
+        alert(`Erro ao excluir item: ${error.message}`);
+        });
+
   }
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     const clickedButton = event.target as HTMLButtonElement;
