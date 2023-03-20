@@ -180,70 +180,7 @@ const DashB = () => {
   }
   
     }
-  
-  const addNewUser = (horario: string | null, tesk: string | null) => {
-    if (!horario || !tesk) {
-      return alert('Por favor, preencha todos os campos');
-    }
-    const newUser = { id: Date.now(), h: horario, t: tesk };
-    let listToUpdate: Task[] = [];
-
-    switch (chenge) {
-      case "Monday":
-        listToUpdate = listMonday;
-        break;
-      case "Tuesday":
-        listToUpdate = listTuesday;
-        break;
-      case "Wednesday":
-        listToUpdate = listWednesday;
-        break;
-      case "Thursday":
-        listToUpdate = listThursday;
-        break;
-      case "Friday":
-        listToUpdate = listFriday;
-        break;
-      case "Saturday":
-        listToUpdate = listSaturday;
-        break;
-      case "Sunday":
-        listToUpdate = listSunday;
-        break;
-      default:
-        break;
-    }
-    if (listToUpdate.some((user) => user.h === horario)) {
-      alert('Horário já ocupado');
-    }
-    const updatedList = [...listToUpdate, newUser];
-    switch (chenge) {
-      case "Monday":
-        setListMonday(updatedList);
-        break;
-      case "Tuesday":
-        setListTuesday(updatedList);
-        break;
-      case "Wednesday":
-        setListWednesday(updatedList);
-        break;
-      case "Thursday":
-        setListThursday(updatedList);
-        break;
-      case "Friday":
-        setListFriday(updatedList);
-        break;
-      case "Saturday":
-        setListSaturday(updatedList);
-        break;
-      case "Sunday":
-        setListSunday(updatedList);
-        break;
-      default:
-        break;
-    }
-  };
-  
+   
   const clearList = (day: string) => {
     setIsLoading(true);
     console.log(day);
@@ -284,24 +221,27 @@ const DashB = () => {
     return {} as Style;
   };
   const deleteOne = (id: string) => {
-    /*
-    if (chenge === "Monday") {
-      setListMonday(listMonday.filter((item) => item.id !== id));
-    } else if (chenge === "Tuesday") {
-      setListTuesday(listTuesday.filter((item) => item.id !== id));
-    } else if (chenge === "Wednesday") {
-      setListWednesday(listWednesday.filter((item) => item.id !== id));
-    } else if (chenge === "Thursday") {
-      setListThursday(listThursday.filter((item) => item.id !== id));
-    } else if (chenge === "Friday") {
-      setListFriday(listFriday.filter((item) => item.id !== id));
-    } else if (chenge === "Saturday") {
-      setListSaturday(listSaturday.filter((item) => item.id !== id));
-    } else if (chenge === "Sunday") {
-      setListSunday(listSunday.filter((item) => item.id !== id));
-    } else {
-      console.log("Invalid day of the week.");
-    } */
+    console.log(id);
+    setIsLoading(true);
+    fetch(`https://latam-challenge-2.deta.dev/api/v1/events/${id}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` } ,
+        
+        })
+        .then(response => {
+        if (response.ok) {
+          setMud(Date());
+          setIsLoading(false);
+          // o item foi excluído com sucesso
+          alert('Item excluído com sucesso!');
+        } else {
+            // a exclusão falhou
+            throw new Error(`Erro ${response.status}: ${response.statusText}`);
+        }
+        })
+        .catch(error => {
+        alert(`Erro ao excluir item: ${error.message}`);
+        });
   }
   return (
     <div className="divPrinc">
@@ -391,12 +331,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -438,12 +381,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -485,12 +431,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -532,12 +481,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -579,12 +531,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -626,12 +581,15 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
@@ -673,25 +631,30 @@ const DashB = () => {
                 newList.forEach((item) => {
                   if (hKeys[item.h!]) {
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      <div className="pai">
+                        <span className="linha"></span>
+                        <li key={item.id}>
+                          <p className="caixa-2" style={{ background: 'linear-gradient(to right, rgba(0, 0, 0, 0.7) 5%, rgba(228, 240, 248, 0.42) 5%)' }}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      </div>
                     );
                   } else {
                     hKeys[item.h!] = [];
                     hKeys[item.h!].push(
-                      <li key={item.id}>
-                        <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}>
-                          {item.h}
-                        </p>
-                        <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
-                          {item.t}
-                          <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
-                        </p>
-                      </li>
+                      
+                        <li key={item.id}>
+                          <p className="caixa" style={{backgroundColor: 'rgba(255, 0, 36, 0.5)'}}>
+                            {item.h}
+                          </p>
+                          <p className="caixa-2" style={{background: 'linear-gradient(to right, rgba(255, 0, 36, 0.5) 5%, rgba(228, 240, 248, 0.42) 5%)'}}>
+                            {item.t}
+                            <span className="span-p" onClick={() => deleteOne(item.id)}>Delete</span>
+                          </p>
+                        </li>
+                      
                     );
                   }
                 });

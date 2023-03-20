@@ -310,3 +310,14 @@
     margin-top:100px;
     margin-left: 300px;
   }
+  .linha{
+    width: 1700px;
+    height: 3px;
+    margin-top: 53px;
+    margin-left: -550px;
+    position: absolute;
+    background-color: black;
+  }
+  .pai{
+    position: relative;
+  }

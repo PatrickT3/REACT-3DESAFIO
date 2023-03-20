@@ -91,7 +91,7 @@ const Subs = () => {
                     <label><span className="span">Country</span><input className="btn-form" type="text" placeholder='Your Country' value={country} onChange={(e) => [setCountry(e.target.value), setError("")]}/></label>
                     <label><span className="span">City</span><input className="btn-form" type="text" placeholder='Your City' value={city} onChange={(e) => [setCity(e.target.value), setError("")]}/></label>
                     <label><span className="span">E-mail</span><input className="btn-form" type="email" placeholder='A valid e-mail here' value={email} onChange={(e) => [setEmail(e.target.value), setError("")]}/></label>
-                    <label><span className="span">password</span><input className="btn-form" type="password" placeholder='Your password' value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/></label>
+                    <label><span className="span">password</span><input className="btn-form" type="password"  minLength={6} placeholder='Your password' value={password} onChange={(e) => [setPassword(e.target.value), setError("")]}/></label>
                     <label><span className="span">password</span><input className="btn-form" type="password" placeholder='Comfirm your password' value={confirmPassword} onChange={(e) => [setconfirmPassword(e.target.value), setError("")]}/></label>
                     <button type="submit" className="btn-button">Register Now</button>
                 </form>
